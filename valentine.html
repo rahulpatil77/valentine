@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Will You? 💘</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+    
+    .heart {
+      position: absolute;
+      font-size: 2em;
+      animation: floatingHearts 6s ease-in infinite;
+    }
+    
+    .heart:nth-child(1) { left: 5%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 15%; animation-delay: 1s; animation-duration: 7s; }
+    .heart:nth-child(3) { left: 25%; animation-delay: 0.5s; }
+    .heart:nth-child(4) { left: 35%; animation-delay: 1.5s; animation-duration: 7.5s; }
+    .heart:nth-child(5) { left: 45%; animation-delay: 1s; }
+    .heart:nth-child(6) { left: 55%; animation-delay: 2s; animation-duration: 6.5s; }
+    .heart:nth-child(7) { left: 65%; animation-delay: 0.5s; }
+    .heart:nth-child(8) { left: 75%; animation-delay: 2.5s; animation-duration: 7s; }
+    .heart:nth-child(9) { left: 85%; animation-delay: 1.5s; }
+    .heart:nth-child(10) { left: 95%; animation-delay: 2s; animation-duration: 7.5s; }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px 40px;
+      border-radius: 30px;
+      text-align: center;
+      width: 500px;
+      box-shadow: 0 20px 60px rgba(214, 51, 132, 0.25);
+      animation: fadeInScale 0.8s ease-out;
+      border: 2px solid rgba(255, 77, 109, 0.1);
+    }
+    
+    h1 {
+      font-size: 2.8em;
+      color: #d63384;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    button {
+      padding: 16px 45px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1em;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    #yes {
+      background: linear-gradient(135deg, #ff4d6d 0%, #d63384 100%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+      flex: 1;
+    }
+    
+    #yes:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(214, 51, 132, 0.5);
+    }
+    
+    #yes:active {
+      transform: translateY(-1px);
+    }
+    
+    #no {
+      background: #f0f0f0;
+      color: #666;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      flex: 1;
+    }
+    
+    #no:hover {
+      background: #e0e0e0;
+      transform: translateY(-2px);
+    }
+    
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes floatingHearts {
+      0% {
+        bottom: -50px;
+        opacity: 0;
+        transform: translateX(0) scale(1);
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 100vh;
+        opacity: 0;
+        transform: translateX(50px) scale(0.5);
+      }
+    }
+    
+    @keyframes celebrate {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.1) rotate(5deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+    
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff4d6d 0%, #d63384 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeInScale 0.6s ease-out;
+    }
+    
+    .celebration-content {
+      text-align: center;
+      animation: slideUp 0.8s ease-out;
+    }
+    
+    .ring-emoji {
+      font-size: 5em;
+      display: inline-block;
+      animation: spin 1s ease-in-out;
+      margin-bottom: 20px;
+    }
+    
+    .celebration h1 {
+      color: white;
+      font-size: 3.5em;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: celebrate 0.8s ease-in-out 0.3s backwards;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+    
+    .celebration-message {
+      color: white;
+      font-size: 1.3em;
+      line-height: 1.9;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      animation: fadeInUp 0.8s ease-out 0.6s backwards;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(-10deg) scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .card {
+        width: 90%;
+        padding: 40px 30px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .button-group {
+        flex-direction: column;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <div class="heart">💕</div>
+    <div class="heart">💕</div>
+    <div class="heart">💕</div>
+    <div class="heart">💕</div>
+    <div class="heart">💕</div>
+    <div class="heart">💕</div>
+  </div>
+
+  <div class="card">
+    <h1>Mugdha, Will you be my Valentine? 💖</h1>
+    <div class="button-group">
+      <button id="yes">Yes 😍</button>
+      <button id="no">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.transform =
+        `translate(${Math.random()*150-75}px, ${Math.random()*150-75}px)`;
+    });
+    
+    noBtn.addEventListener("click", () => {
+      noBtn.style.transform =
+        `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+    });
+
+    yesBtn.onclick = () => {
+      document.body.innerHTML = `
+        <div class="celebration">
+          <div class="celebration-content">
+            <div class="ring-emoji">💍</div>
+            <h1>She said YES!!! 🎉</h1>
+            <p class="celebration-message">
+              Oh my beautiful Mugdha,<br><br>
+              You've just made me the happiest man alive! 💕<br>
+              You are my Chottusu, my Aishwarya, my penguin...<br>
+              You are my entire world, my greatest love, my forever. 💫<br><br>
+              Let's spend the rest of our lives creating infinite beautiful memories together.<br>
+              I promise to love you with all my heart, every single day.<br><br>
+              I love you! 🥰❤️
+            </p>
+          </div>
+        </div>`;
+    };
+  </script>
+
+</body>
+</html>
